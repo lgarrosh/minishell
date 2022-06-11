@@ -52,7 +52,7 @@ OBJ_B = $(addprefix $(OBJ_D), $(SRC_B:.c=.o))
 
 # OBJ_B = $(SRC_B:.c=.o)
 
-OBJ_D = ../obj/
+OBJ_D = ../src/obj/
 
 HEADER = libft.h
 

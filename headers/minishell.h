@@ -6,17 +6,14 @@
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/04 19:41:37 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/06/06 13:33:50 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <string.h>
-# include <fcntl.h>
-# include <stdio.h>
 # include <sys/stat.h>
 # include <errno.h>
 # include <termios.h>
@@ -25,6 +22,7 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 # include "../liba/libft.h"
+# include "get_next_line.h"
 
 typedef struct s_env
 {
