@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/20 19:01:43 by preed             #+#    #+#             */
+/*   Updated: 2022/03/28 18:32:11 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// adds new structure to the beginning of a linked list
+// double pointer is needed because we want to change 
+// the pointer to the linked list outside of this function 
+// (globally)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	if (!new || !lst)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

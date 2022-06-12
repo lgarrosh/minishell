@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/10 16:22:30 by preed             #+#    #+#             */
+/*   Updated: 2022/03/23 16:24:42 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// a -> A
+int	ft_toupper(int c)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

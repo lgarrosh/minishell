@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/20 14:06:30 by preed             #+#    #+#             */
+/*   Updated: 2022/03/28 18:12:04 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <unistd.h>
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// Outputs the string ’s’ to the given file descriptor
+void	ft_putstr_fd(char *s, int fd)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	if (s)
+	{
+		while (*s)
+		{
+			write(fd, s, 1);
+			s++;
+		}
+	}
 }

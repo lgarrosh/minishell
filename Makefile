@@ -1,52 +1,66 @@
-NAME = minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: preed <preed@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/06 17:42:40 by preed             #+#    #+#              #
+#    Updated: 2022/06/12 18:35:11 by preed            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-LIBA_D = liba/
-GNL_D = gnl/
-HEAD_D = headers/
-SRC_D = src/
-PARSE_D = parser/
-OBJ_D = obj/
-EXEC_D = execution/
+NAME		= minishell
 
-LIBA_LIB = $(LIBA_D)libft.a
-LIBA_HEAD = $(LIBA_D)libft.h
-HEADERS = $(HEAD_D)minishell.h $(HEAD_D)get_next_line.h
+CC			= gcc
+FLAGS		= -Wall -Wextra -Werror
 
-FLAGS = -Wall -Wextra -Werror
+LIBFT		= libft/libft.a
+INC			= includes/
+HEADER		= minishell.h
+HEADERS		= $(addprefix $(INC), $(HEADER))
 
-SRC_F = env.c free.c main.c env_oper.c
-GNL_F = get_next_line.c
-PARSE_F =
-EXEC_F =
-ALL_SRC := $(addprefix $(SRC_D), $(SRC_F) $(GNL_D)$(GNL_F) $(PARSE_F) $(EXEC_F))
+LIB_DIR		= libft/
+SRC_D		= src/
+OBJ_D		= obj/
 
-OBJ_SRC = $(addprefix $(SRC_D)$(OBJ_D), $(SRC_F:.c=.o))
-OBJ_GNL = $(addprefix $(SRC_D)$(OBJ_D)$(GNL_D), $(GNL_F:.c=.o))
-OBJ_PARSE = $(addprefix $(SRC_D)$(OBJ_D)$(PARSE_D), $(PARSE_F:.c=.o))
-OBJ_EXEC = $(addprefix $(SRC_D)$(OBJ_D)$(EXEC_D), $(EXEC_F:.c=.o))
-OBJS := $(OBJ_F) $(OBJ_GNL) $(OBJ_EXEC) $(OBJ_PARSE)
+SRC_F 		=	$(addprefix src/main/, $(MAIN)) \
+				$(addprefix src/env/, $(ENV)) \
+				$(addprefix src/execution/, $(EXEC)) \
+				$(addprefix src/tools/, $(TOOLS)) \
 
-all: $(NAME)
+MAIN		= main.c
 
-$(NAME): $(OBJ_D) $(LIBA_LIB) $(OBJS) $(HEADERS) $(LIBA_HEAD) Makefile
-	cc $(FLAGS) $(OBJS) -o $(NAME) $(LIBA_LIB) -I $(HEADERS)
+ENV			= env.c env_oper.c
+
+EXEC		= executive.c
+
+TOOLS		= free.c
+
+OBJ_F 		= $(subst $(SRC_D),$(OBJ_D),$(SRC_F:%.c=%.o))
+
+$(OBJ_D)%.o: $(SRC_D)%.c
+	$(CC) $(FLAGS) -c $< -o $@  -I$(INC)
+
+.PHONY: all clean fclean re
+
+all: makelib $(NAME)
 
 $(OBJ_D):
-	@mkdir -p $(SRC_D)$(OBJ_D)
+		@mkdir -p $@
+		@mkdir -p $(addprefix $@/, main env execution tools)
 
-$(OBJS)*.o: $(ALL_SRC) $(HEAD_D)*.h
-	@echo $(OBJS)
-	cc $(FLAGS) -I $(HEAD_D) -I $(LIBA_HEAD) -o $@ -c $<
+$(NAME): $(OBJ_D) $(OBJ_F) $(LIBFT) $(HEADERS) Makefile
+	$(CC) $(FLAGS) $(OBJ_F) -o $(NAME) $(LIBFT) -I$(INC)
 
-$(LIBA_LIB):
-	@make -C $(LIBA_D) --no-print-directory
+makelib:
+	@make -C $(LIB_DIR) bonus --no-print-directory
 
 clean:
+	@make -C $(LIB_DIR) clean --no-print-directory
 	rm -rfv $(OBJ_D)
-	@make -C $(LIBA_D) clean --no-print-directory
 
 fclean: clean
-	rm -rfv $(NAME)
-	@make -C $(LIBA_D) fclean --no-print-directory
+	rm -rfv $(NAME) $(LIBFT)
 
 re: fclean all

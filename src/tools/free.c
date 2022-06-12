@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2022/06/02 16:42:44 by lgarrosh          #+#    #+#             */
+/*   Updated: 2022/06/12 18:07:09 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+void	ft_free_env_stack(t_env **env)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	t_env	*tmp;
+
+	if (!env)
+		return ;
+	while (*env)
+	{
+		tmp = (*env)->next;
+		ft_free_env_node(*env);
+		*env = tmp;
+	}
+}
+
+void	ft_free_env_node(t_env *env)
+{
+	free(env->name);
+	free(env->value);
+	free(env);
 }

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/20 17:27:59 by preed             #+#    #+#             */
+/*   Updated: 2022/03/28 18:31:53 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// creates a structure in heap with content
+// and null pointer in next
+t_list	*ft_lstnew(void *content)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	t_list	*a;
+
+	a = (t_list *)malloc(sizeof(t_list));
+	if (!a)
+		return (NULL);
+	a->content = content;
+	a->next = NULL;
+	return (a);
 }

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/10 16:22:30 by preed             #+#    #+#             */
+/*   Updated: 2022/03/23 18:18:09 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// returns the address of the last symbol c
+// found in the string
+char	*ft_strrchr(const char *s, int c)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
+	int	i;
+
+	i = ft_strlen(s);
+	while (s[i] != (char)c && i > 0)
+		i--;
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
 	return (0);
 }

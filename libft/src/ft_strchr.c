@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/10 16:22:30 by preed             #+#    #+#             */
+/*   Updated: 2022/03/23 16:31:41 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// finds the first c symbol in string s
+// c can be '\0'. returns its address
+char	*ft_strchr(const char *s, int c)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
+	while (*s != (char)c && *s != '\0')
+		s++;
+	if (((char)c == '\0' && *s == '\0') || *s != '\0')
+		return ((char *)s);
 	return (0);
 }

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/18 16:49:54 by preed             #+#    #+#             */
+/*   Updated: 2022/03/28 18:10:52 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// applies function (*f) to every element of s
+// returns the altered string allocated in heap
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	char	*e;
+	int		l;
+
+	if (!s || !*f)
+		return (0);
+	l = ft_strlen(s);
+	e = (char *)ft_calloc(l + 1, sizeof(char));
+	if (e == 0)
+		return (0);
+	while (l--)
+		e[l] = (*f)(l, s[l]);
+	return (e);
 }

@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:09:22 by preed            ###   ########.fr       */
+/*   Created: 2021/10/20 20:39:42 by preed             #+#    #+#             */
+/*   Updated: 2022/03/28 18:33:54 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+// Adds the element ’new’ at the end of the list.
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	t_list	*a;
+
+	if (!*lst)
+	{
+		*lst = new;
+		new->next = 0;
+		return ;
+	}
+	if (new == 0 || !lst)
+		return ;
+	a = ft_lstlast(*lst);
+	a->next = new;
 }
