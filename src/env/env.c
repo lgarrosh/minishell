@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:02:33 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:07:17 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/15 01:27:05 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_env	*ft_creat_node(char *name, char *value);
 static void		ft_add_node(t_env **env, t_env *node);
 
-t_env	*ft_init_env(char **env)
+t_env	*ft_env_init(char **env)
 {
 	t_env	*env_list;
 	t_env	*newnode;
@@ -69,9 +69,27 @@ static void	ft_add_node(t_env **env, t_env *node)
 	}
 }
 
-void	ft_creatadd_env(t_env **env_list, char *name, char *value)
+void	ft_env_export(t_env **env_list, char *name, char *value)
 {
 	if (!name || !value || !env_list)
 		return ;
+	if (ft_if_name_in_env(env_list, name))
+		ft_env_unset(env_list, name);
 	ft_add_node(env_list, ft_creat_node(name, value));
+}
+
+t_env	*ft_if_name_in_env(t_env **stack, char *name)
+{
+	t_env *tmp;
+
+	if (!stack || !name)
+		return (NULL);
+	tmp = *stack;
+	while(tmp)
+	{
+		if (!(ft_strncmp(tmp->name, name, ft_strlen(name) + 1)))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:42:44 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:07:09 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/14 19:10:28 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_free_env_stack(t_env **env)
 		ft_free_env_node(*env);
 		*env = tmp;
 	}
+	free(env);
 }
 
 void	ft_free_env_node(t_env *env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:36:42 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/15 01:24:23 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define MINISHELL_H
 
 # include <string.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <termios.h>
-# include <term.h>
-# include <curses.h>
-# include <termcap.h>
-# include <sys/ioctl.h>
+// # include <sys/stat.h>
+// # include <errno.h>
+// # include <termios.h>
+// # include <term.h>
+// # include <curses.h>
+// # include <termcap.h>
+// # include <sys/ioctl.h>
 # include "../libft/includes/libft.h"
 # include "get_next_line.h"
 
@@ -35,10 +35,13 @@ typedef struct s_env
 void	ft_free_env_stack(t_env **env);
 void	ft_free_env_node(t_env *env);
 //env
-t_env	*ft_init_env(char **env);
-void	ft_creatadd_env(t_env **env_list, char *name, char *value);
-void	ft_put_env(t_env **env_list);
-void	ft_delet_env(t_env **env_list, char *name);
+t_env	**ft_get_env(char **env);
+t_env	*ft_env_init(char **env);
+void	ft_env_export(t_env **env_list, char *name, char *value);
+void	ft_env_put(t_env **env_list);
+void	ft_env_unset(t_env **env_list, char *name);
+void	ft_env_put_name(t_env *env, char *name);
+t_env	*ft_if_name_in_env(t_env **stack, char *name);
 
 // printf("\n\n!!!TEST!!!\n\n");
 

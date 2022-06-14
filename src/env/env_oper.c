@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_oper.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 19:05:24 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/12 18:07:20 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/15 01:38:22 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_put_env(t_env **env_list)
+void	ft_env_put(t_env **env_list)
 {
 	t_env	*node;
 
@@ -27,7 +27,7 @@ void	ft_put_env(t_env **env_list)
 	}
 }
 
-void	ft_delet_env(t_env **env_list, char *name)
+void	ft_env_unset(t_env **env_list, char *name)
 {
 	t_env	*tmp;
 	t_env	*env;
@@ -36,7 +36,7 @@ void	ft_delet_env(t_env **env_list, char *name)
 		return ;
 	env = *env_list;
 	tmp = env->next;
-	if (!(ft_strncmp(env->name, name, ft_strlen(name))))
+	if (!(ft_strncmp(env->name, name, ft_strlen(name) + 1)))
 	{
 		ft_free_env_node(env);
 		env_list = &tmp;
@@ -44,7 +44,7 @@ void	ft_delet_env(t_env **env_list, char *name)
 	}
 	while (tmp)
 	{
-		if (!(ft_strncmp(tmp->name, name, ft_strlen(name))))
+		if (!(ft_strncmp(tmp->name, name, ft_strlen(name) + 1)))
 		{
 			env->next = tmp->next;
 			ft_free_env_node(tmp);
@@ -58,9 +58,23 @@ void	ft_delet_env(t_env **env_list, char *name)
 t_env	**ft_get_env(char **env)
 {
 	t_env	**env_stack;
-	t_env	*envnode;
 
-	envnode = ft_init_env(env);
-	env_stack = &envnode;
+	env_stack = (t_env **)ft_calloc(sizeof(t_env *), 1);
+	*env_stack = ft_env_init(env);
 	return (env_stack);
+}
+
+void	ft_env_put_name(t_env *env, char *name)
+{
+	if (!env || !name)
+	{
+		printf("/n");
+		return ;
+	}
+	while (env)
+	{
+		if (!(ft_strncmp(env->name, name, ft_strlen(name) + 1)))
+			printf("%s\n", env->value);
+		env = env->next;
+	}
 }
