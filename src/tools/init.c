@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/02 15:54:56 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/15 19:30:35 by lgarrosh         ###   ########.fr       */
+/*   Created: 2022/06/15 15:25:19 by lgarrosh          #+#    #+#             */
+/*   Updated: 2022/06/15 18:19:59 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	minishell(char **env)
+t_bash	*ft_init_bash(char **env)
 {
 	t_bash	*info;
 
-	info = ft_init_bash(env);
-	main_loop(info);
-}
-
-void	main_loop(t_bash *info)
-{
-	char	*str;
-
-	while (!info->stop)
-	{
-		write (1, "minishell > ", 12);
-		str = get_next_line(0);
-		printf("%s\n", str);
-		// ft_parser(info, str);
-		// execution(info);
-	}
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	(void)argc;
-	(void)argv;
-	minishell(env);
-	return (0);
+	info = (t_bash *)ft_calloc(sizeof(t_bash), 1);
+	info->env_list = ft_get_env(env);
+	info->nbr_comand_in_line = -1;
+	info->stop = 0;
+	return (info);
 }
