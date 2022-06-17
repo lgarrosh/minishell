@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/15 19:35:37 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/06/18 02:10:13 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_env_put_name(t_env *env, char *name);
 t_env	*ft_if_name_in_env(t_env **stack, char *name);
 //init
 t_bash	*ft_init_bash(char **env);
+//error
+void	ft_error(const char *err);
 
 // printf("\n\n!!!TEST!!!\n\n");
 

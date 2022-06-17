@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+         #
+#    By: arman <arman@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 17:42:40 by preed             #+#    #+#              #
-#    Updated: 2022/06/15 19:35:04 by lgarrosh         ###   ########.fr        #
+#    Updated: 2022/06/18 02:23:50 by arman            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_F 		=	$(addprefix src/main/, $(MAIN)) \
 				$(addprefix src/tools/, $(TOOLS)) \
 				$(addprefix src/parser/, $(PARSER)) \
 
-GNL			= get_next_line.c get_next_line_utils.c
+GNL			= get_next_line.c
 
 MAIN		= main.c
 
@@ -41,7 +41,7 @@ ENV			= env.c env_oper.c
 
 EXEC		= executive.c
 
-TOOLS		= free.c init.c
+TOOLS		= free.c init.c error.c
 
 PARSER		= parser.c
 
