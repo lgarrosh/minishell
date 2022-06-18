@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+
+void	ft_error(const char *err);
 
 static void	ft_free(void **ch)
 {
@@ -24,10 +27,12 @@ static char	*ft_read(int fd)
 	char	*masiv;
 	int		i;
 
-	masiv = (char *)ft_calloc(1, BUFFER_SIZE + 1);
-	if (!masiv)
+	i = read(fd, masiv = (char *)ft_calloc(1, BUFFER_SIZE + 1), BUFFER_SIZE);
+	if (i < 0)
+	{
+		ft_free((void **)&masiv);
 		return (NULL);
-	i = read(fd, masiv, BUFFER_SIZE);
+	}
 	while (!ft_strchr(masiv, 10) && i == BUFFER_SIZE)
 	{
 		ch = (char *)ft_calloc(1, BUFFER_SIZE + 1);
@@ -41,6 +46,7 @@ static char	*ft_read(int fd)
 		masiv = ft_strjoin(masiv, ch);
 		ft_free((void **)&ch);
 	}
+	*ft_strchr(masiv, 10) = 0;
 	return (masiv);
 }
 
@@ -49,5 +55,7 @@ char	*get_next_line(int fd)
 	char		*buff;
 
 	buff = ft_read(fd);
+	if (!buff)
+		ft_error("EEROR: gnl");
 	return (buff);
 }

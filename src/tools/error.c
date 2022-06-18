@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	 ft_error(const char *err)
+void	ft_error(const char *err)
 {
 	write(2, err, ft_strlen(err));
 	exit(1);
