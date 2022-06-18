@@ -56,6 +56,6 @@ char	*get_next_line(int fd)
 
 	buff = ft_read(fd);
 	if (!buff)
-		ft_error("EEROR: gnl");
+		return (NULL);
 	return (buff);
 }
