@@ -28,6 +28,7 @@ void	main_loop(t_bash *info)
 	{
 		write (1, "minishell > ", 12);
 		str = get_next_line(0);
+		printf("...%s...\n", str);
 		// ft_parser(info, str);
 		// execution(info);
 	}

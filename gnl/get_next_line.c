@@ -15,38 +15,38 @@
 
 void	ft_error(const char *err);
 
-static void	ft_free(void **ch)
+static void	*ft_free(void **ch)
 {
 	free(*ch);
 	*ch = NULL;
+	return (NULL);
 }
 
 static char	*ft_read(int fd)
 {
 	char	*ch;
 	char	*masiv;
+	char	*tmp;
 	int		i;
 
 	i = read(fd, masiv = (char *)ft_calloc(1, BUFFER_SIZE + 1), BUFFER_SIZE);
 	if (i < 0)
-	{
-		ft_free((void **)&masiv);
-		return (NULL);
-	}
+		return (ft_free((void **)&masiv));
 	while (!ft_strchr(masiv, 10) && i == BUFFER_SIZE)
 	{
-		ch = (char *)ft_calloc(1, BUFFER_SIZE + 1);
-		i = read(fd, ch, BUFFER_SIZE);
+		i = read(fd, ch = (char *)ft_calloc(1, BUFFER_SIZE + 1), BUFFER_SIZE);
 		if (i < 0)
 		{
 			ft_free((void **)&ch);
-			ft_free((void **)&masiv);
-			return (NULL);
+			return (ft_free((void **)&masiv));
 		}
-		masiv = ft_strjoin(masiv, ch);
+		tmp = ft_strjoin(masiv, ch);
+		ft_free((void **)&masiv);
 		ft_free((void **)&ch);
+		masiv = tmp;
 	}
-	*ft_strchr(masiv, 10) = 0;
+	if (ft_strchr(masiv, 10))
+		*ft_strchr(masiv, 10) = 0;
 	return (masiv);
 }
 
