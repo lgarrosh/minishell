@@ -6,7 +6,7 @@
 /*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/18 02:10:13 by arman            ###   ########.fr       */
+/*   Updated: 2022/06/20 04:26:44 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,33 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-typedef struct s_env
+typedef struct s_env //переменные окружения
 {
 	char			*name;
 	char			*value;
 	struct s_env	*next;
 }				t_env;
 
-typedef struct s_bash
+typedef struct s_line //строка напечатаная пользователем 
 {
 	int		nbr_comand_in_line;
+}				t_line;
+
+typedef struct s_cmd
+{
+	
+}				t_cmd;
+
+typedef struct s_bash //вся основная тнформация программы
+{
+	
 	t_env	**env_list;
 	int		stop;
 }				t_bash;
 
 //main
 void	minishell(char **env);
-void	main_loop(t_bash *info);
+void	main_loop(t_bash *info); //основной цикл программы
 //free
 void	ft_free_env_stack(t_env **env);
 void	ft_free_env_node(t_env *env);
