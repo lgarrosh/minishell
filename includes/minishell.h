@@ -6,7 +6,7 @@
 /*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/20 04:26:44 by arman            ###   ########.fr       */
+/*   Updated: 2022/06/23 20:45:45 by arman            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_env //переменные окружения
 
 typedef struct s_line //строка напечатаная пользователем 
 {
-	int		nbr_comand_in_line;
+	int		nbr_cmd;
 }				t_line;
 
 typedef struct s_cmd
