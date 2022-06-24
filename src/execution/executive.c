@@ -19,3 +19,7 @@ int	ft_execute(char **comand, int in_fd, int out_fd)
 	(void)out_fd;
 	return (0);
 }
+
+viod	ft_pipex(t_bash *info, t_cmd *com)
+{
+}
