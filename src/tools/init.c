@@ -18,7 +18,6 @@ t_bash	*ft_init_bash(char **env)
 
 	info = (t_bash *)ft_calloc(sizeof(t_bash), 1);
 	info->env_list = ft_get_env(env);
-	info->nbr_comand_in_line = -1;
 	info->stop = 0;
 	return (info);
 }
