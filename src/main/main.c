@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 15:54:56 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/20 04:27:37 by arman            ###   ########.fr       */
+/*   Updated: 2022/06/25 18:18:47 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	main_loop(t_bash *info)
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
+	pipex(argc, argv, env);
 	(void)argv;
 	minishell(env);
 	return (0);

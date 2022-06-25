@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/23 20:45:45 by arman            ###   ########.fr       */
+/*   Updated: 2022/06/25 18:14:41 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,29 @@ typedef struct s_env //переменные окружения
 	struct s_env	*next;
 }				t_env;
 
+typedef struct s_pipex
+{
+	pid_t	*pid;
+	int		*pipe;
+	int		infile;
+	int		outfile;
+	int		nbr_cmd;
+	char	**commands;
+}			t_pipex;
+
 typedef struct s_line //строка напечатаная пользователем 
 {
 	int		nbr_cmd;
 }				t_line;
 
-typedef struct s_cmd
-{
-	
-}				t_cmd;
-
 typedef struct s_bash //вся основная тнформация программы
 {
-	
 	t_env	**env_list;
 	int		stop;
 }				t_bash;
+
+// pipex
+int		pipex(int argc, char *argv[], char *envp[]);
 
 //main
 void	minishell(char **env);

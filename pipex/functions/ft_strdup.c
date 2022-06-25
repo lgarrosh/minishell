@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/25 15:32:13 by lgarrosh         ###   ########.fr       */
+/*   Created: 2022/06/25 17:15:01 by lgarrosh          #+#    #+#             */
+/*   Updated: 2022/06/25 17:28:40 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/pipex_bonus.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+char	*ft_strdup(const char *src)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	char	*cp;
+	size_t	i;
+
+	i = 0;
+	cp = (char *)malloc(ft_strlen(src) + 1);
+	if (!cp)
+		return (NULL);
+	while (src[i])
+	{
+		cp[i] = src[i];
+		i++;
+	}
+	cp[i] = '\0';
+	return (cp);
 }

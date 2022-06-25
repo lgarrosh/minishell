@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executive.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:01:02 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/25 15:32:13 by lgarrosh         ###   ########.fr       */
+/*   Created: 2022/06/25 17:15:06 by lgarrosh          #+#    #+#             */
+/*   Updated: 2022/06/25 17:28:44 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/pipex_bonus.h"
 
-int	ft_execute(char **comand, int in_fd, int out_fd)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	(void)comand;
-	(void)in_fd;
-	(void)out_fd;
-	return (0);
+	char	*j_str;
+	size_t	i;
+	size_t	j;
+
+	j_str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!j_str)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		j_str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		j_str[i] = s2[j];
+		i++;
+		j++;
+	}
+	j_str[i] = '\0';
+	return (j_str);
 }
