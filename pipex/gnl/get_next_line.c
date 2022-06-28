@@ -19,7 +19,7 @@ int	some_error(char *str)
 	return (-1);
 }
 
-int	get_next_line(int fd, char **line)
+int	ft_get_next_line(int fd, char **line)
 {
 	char		*buf;
 	int			rd;

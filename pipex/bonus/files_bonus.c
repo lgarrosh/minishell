@@ -19,24 +19,32 @@ char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
-void	get_infile(char **argv, t_ppxb *pipex)
+void	get_infile(char **argv, t_pipex *pip, t_ppxb *pipex)
 {
-	if (!ft_strncmp("here_doc", argv[1], 9))
+	if (pipex->here_doc)
 		here_doc(argv[2], pipex);
 	else
 	{
-		pipex->infile = open(argv[1], O_RDONLY);
-		if (pipex->infile < 0)
+		if (pip->infile)
+			pipex->infile = open(pip->infile, O_RDONLY);
+		else
+			pipex->infile = -1;
+		if ((pipex->infile < 0) && pip->infile)
 			msg_error(ERR_INFILE);
 	}
 }
 
-void	get_outfile(char *argv, t_ppxb *pipex)
+void	get_outfile(t_pipex *pip, t_ppxb *pipex)
 {
 	if (pipex->here_doc)
-		pipex->outfile = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0000644);
+		pipex->outfile = open(pip->outfile, O_WRONLY | O_CREAT | O_APPEND, 0000644);
 	else
-		pipex->outfile = open(argv, O_CREAT | O_RDWR | O_TRUNC, 0000644);
-	if (pipex->outfile < 0)
+	{
+		if (pip->outfile)
+			pipex->outfile = open(pip->outfile, O_CREAT | O_RDWR | O_TRUNC, 0000644);
+		else
+			pipex->outfile = -1;
+	}
+	if ((pipex->outfile < 0) && pip->outfile)
 		msg_error(ERR_OUTFILE);
 }

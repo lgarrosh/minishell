@@ -18,7 +18,7 @@ FLAGS		= -Wall -Wextra -Werror
 LIBFT		= libft/libft.a
 PIPEX		= pipex/pipex.a
 INC			= includes/
-HEADER		= minishell.h
+HEADER		= minishell.h struct.h
 HEADERS		= $(addprefix $(INC), $(HEADER))
 
 LIB_DIR		= libft/

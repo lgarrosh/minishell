@@ -32,8 +32,10 @@ static char	*get_cmd(char **paths, char *cmd)
 
 static void	sub_dup2(int zero, int first)
 {
-	dup2(zero, 0);
-	dup2(first, 1);
+	if (zero >= 0)
+		dup2(zero, 0);
+	if (first >= 0)
+		dup2(first, 1);
 }
 
 void	child(t_ppxb p, char **argv, char **envp)
@@ -48,7 +50,7 @@ void	child(t_ppxb p, char **argv, char **envp)
 		else
 			sub_dup2(p.pipe[2 * p.idx - 2], p.pipe[2 * p.idx + 1]);
 		close_pipes(&p);
-		p.cmd_args = ft_split(argv[2 + p.here_doc + p.idx], ' ');
+		p.cmd_args = ft_split(argv[1 + p.here_doc + p.idx], ' ');
 		p.cmd = get_cmd(p.cmd_paths, p.cmd_args[0]);
 		if (!p.cmd)
 		{

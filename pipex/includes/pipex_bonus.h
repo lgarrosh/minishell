@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include "../../libft/includes/libft.h"
 # include "../gnl/get_next_line.h"
+# include "../../includes/struct.h"
 
 # define ERR_INFILE "Infile"
 # define ERR_OUTFILE "Outfile"
@@ -48,16 +49,16 @@ typedef struct s_ppxb
 	int		idx;
 }			t_ppxb;
 
-int		pipex(int argc, char *argv[], char *envp[]);
+int		pipex(int argc, char **argv, t_pipex *pip);
 void	close_pipes(t_ppxb *pipex);
 void	child(t_ppxb pipex, char **argv, char **envp);
 void	parent_free(t_ppxb *pipex);
 void	child_free(t_ppxb *pipex);
 void	pipe_free(t_ppxb *pipex);
 char	*find_path(char **envp);
-void	get_infile(char **argv, t_ppxb *pipex);
-void	get_outfile(char *argv, t_ppxb *pipex);
-int		args_in(char *arg, t_ppxb *pipex);
+void	get_infile(char **argv, t_pipex *pip, t_ppxb *pipex);
+void	get_outfile(t_pipex *pip, t_ppxb *pipex);
+void	doc(char *arg, t_ppxb *pipex);
 void	here_doc(char *argv, t_ppxb *pipex);
 void	msg_error(char *err);
 void	msg_pipe(char *arg);

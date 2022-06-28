@@ -12,18 +12,12 @@
 
 #include "../includes/pipex_bonus.h"
 
-int	args_in(char *arg, t_ppxb *pipex)
+void	doc(char *arg, t_ppxb *pipex)
 {
 	if (arg && !ft_strncmp("here_doc", arg, 9))
-	{
 		pipex->here_doc = 1;
-		return (6);
-	}
 	else
-	{
 		pipex->here_doc = 0;
-		return (5);
-	}
 }
 
 void	here_doc(char *argv, t_ppxb *pipex)
@@ -37,7 +31,7 @@ void	here_doc(char *argv, t_ppxb *pipex)
 	while (1)
 	{
 		write(1, "heredoc> ", 9);
-		if (get_next_line(0, &buf) < 0)
+		if (ft_get_next_line(0, &buf) < 0)
 			exit(1);
 		if (!ft_strncmp(argv, buf, ft_strlen(argv) + 1))
 			break ;

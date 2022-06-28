@@ -24,37 +24,10 @@
 // # include <sys/ioctl.h>
 # include "libft.h"
 # include "get_next_line.h"
-
-typedef struct s_env //переменные окружения
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}				t_env;
-
-typedef struct s_pipex
-{
-	pid_t	*pid;
-	int		*pipe;
-	int		infile;
-	int		outfile;
-	int		nbr_cmd;
-	char	**commands;
-}			t_pipex;
-
-typedef struct s_line //строка напечатаная пользователем 
-{
-	int		nbr_cmd;
-}				t_line;
-
-typedef struct s_bash //вся основная тнформация программы
-{
-	t_env	**env_list;
-	int		stop;
-}				t_bash;
+# include "struct.h"
 
 // pipex
-int		pipex(int argc, char *argv[], char *envp[]);
+int 	pipex(int argc, char **argv, t_pipex *pip);
 
 //main
 void	minishell(char **env);
