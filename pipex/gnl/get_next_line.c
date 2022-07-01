@@ -38,6 +38,7 @@ int	ft_get_next_line(int fd, char **line)
 			return (some_error(buf));
 		buf[rd] = '\0';
 		rem = str_join(rem, buf);
+		// rem = ft_strjoin(rem, buf);
 	}
 	free(buf);
 	*line = get_line(rem);

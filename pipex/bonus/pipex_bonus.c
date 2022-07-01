@@ -17,7 +17,6 @@ static void	creat_pipes(t_ppxb *pipex)
 	int	i;
 
 	i = 0;
-	printf("%d\n", pipex->cmd_nmbs);
 	while (i < pipex->cmd_nmbs - 1)
 	{
 		if (pipe(pipex->pipe + 2 * i) < 0)
