@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 02:12:27 by arman             #+#    #+#             */
-/*   Updated: 2022/06/18 02:12:33 by arman            ###   ########.fr       */
+/*   Updated: 2022/07/03 15:47:45 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_error(const char *err)
 {
+	write(2, "Error: ", 8);
 	write(2, err, ft_strlen(err));
-	exit(1);
 }

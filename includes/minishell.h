@@ -6,7 +6,7 @@
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/25 18:14:41 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/07/03 16:17:13 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "struct.h"
 
 // pipex
-int 	pipex(int argc, char **argv, t_pipex *pip);
+int		pipex(int argc, char **argv, t_pipex *pip);
 
 //main
 void	minishell(char **env);
@@ -44,9 +44,14 @@ void	ft_env_unset(t_env **env_list, char *name);
 void	ft_env_put_name(t_env *env, char *name);
 t_env	*ft_if_name_in_env(t_env **stack, char *name);
 //init
-t_bash	*ft_init_bash(char **env);
+void	ft_init_bash(t_bash **info, char **env);
+void	ft_init_line(t_line **line);
 //error
 void	ft_error(const char *err);
+//parser
+void	ft_parser(t_bash *info);
+//executr
+void	ft_execute(t_bash *info);
 
 // printf("\n\n!!!TEST!!!\n\n");
 

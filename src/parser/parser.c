@@ -6,8 +6,13 @@
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:16:35 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/15 15:16:36 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/07/03 16:19:47 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_parser(t_bash *info)
+{
+	(void)info;
+}
