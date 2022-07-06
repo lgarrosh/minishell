@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 15:16:35 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/07/03 16:19:47 by lgarrosh         ###   ########.fr       */
+/*   Created: 2022/06/25 17:15:13 by lgarrosh          #+#    #+#             */
+/*   Updated: 2022/06/25 17:28:48 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/pipex_bonus.h"
 
-void	ft_parser(t_bash *info)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	(void)info;
+	while ((*s1 || *s2) && (n > 0))
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+		n--;
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arman <arman@student.42.fr>                +#+  +:+       +#+         #
+#    By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 17:42:40 by preed             #+#    #+#              #
-#    Updated: 2022/06/18 02:23:50 by arman            ###   ########.fr        #
+#    Updated: 2022/06/25 18:12:55 by lgarrosh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CC			= cc
 FLAGS		= -Wall -Wextra -Werror
 
 LIBFT		= libft/libft.a
+PIPEX		= pipex/pipex.a
 INC			= includes/
-HEADER		= minishell.h
+HEADER		= minishell.h struct.h
 HEADERS		= $(addprefix $(INC), $(HEADER))
 
 LIB_DIR		= libft/
+PIP_DIR		= pipex/
 GNL_D		= gnl/
 SRC_D		= src/
 OBJ_D		= obj/
@@ -50,10 +52,10 @@ OBJ_F 		=	$(subst $(SRC_D),$(OBJ_D),$(SRC_F:%.c=%.o))
 OBJ_GNL_F 	=	$(addprefix obj/, $(SRC_GNL_F:%.c=%.o))
 
 $(OBJ_D)%.o: $(SRC_D)%.c
-	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC)
+	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC) -I$(PIP_DIR)$(INC)
 
 $(OBJ_D)$(GNL_D)%.o: $(GNL_D)%.c
-	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC)
+	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC) -I$(PIP_DIR)$(INC)
 
 .PHONY: all clean fclean re
 
@@ -63,17 +65,21 @@ $(OBJ_D):
 		@mkdir -p $@
 		@mkdir -p $(addprefix $@/, main env execution tools parser gnl)
 
-$(NAME): $(OBJ_D) $(OBJ_F) $(OBJ_GNL_F) $(LIBFT) $(HEADERS) Makefile
-	$(CC) $(FLAGS) $(OBJ_F) $(OBJ_GNL_F) -o $(NAME) $(LIBFT) -I$(INC)
+$(NAME): $(OBJ_D) $(OBJ_F) $(OBJ_GNL_F) $(LIBFT) $(PIPEX) $(HEADERS) Makefile
+	$(CC) $(FLAGS) $(OBJ_F) $(OBJ_GNL_F) -o $(NAME) $(LIBFT) $(PIPEX) -I$(INC)
 
 makelib:
 	@make -C $(LIB_DIR) bonus --no-print-directory
+	@make -C $(PIP_DIR) --no-print-directory
 
 clean:
 	@make -C $(LIB_DIR) clean --no-print-directory
+	@make -C $(PIP_DIR) clean --no-print-directory
 	rm -rfv $(OBJ_D)
 
 fclean: clean
-	rm -rfv $(NAME) $(LIBFT)
+	@make -C $(LIB_DIR) fclean --no-print-directory
+	@make -C $(PIP_DIR) fclean --no-print-directory
+	rm -rfv $(NAME)
 
 re: fclean all
