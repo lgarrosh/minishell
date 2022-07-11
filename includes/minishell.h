@@ -6,7 +6,7 @@
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/07/03 16:17:13 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/07/06 18:53:35 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <string.h>
 # include <stdio.h>
+
+# include <readline/readline.h> 
+# include <readline/history.h>
+
 // # include <sys/stat.h>
 // # include <errno.h>
 // # include <termios.h>
@@ -22,13 +26,13 @@
 // # include <curses.h>
 // # include <termcap.h>
 // # include <sys/ioctl.h>
+
 # include "libft.h"
 # include "get_next_line.h"
 # include "struct.h"
 
 // pipex
 int		pipex(int argc, char **argv, t_pipex *pip);
-
 //main
 void	minishell(char **env);
 void	main_loop(t_bash *info); //основной цикл программы
@@ -52,6 +56,11 @@ void	ft_error(const char *err);
 void	ft_parser(t_bash *info);
 //executr
 void	ft_execute(t_bash *info);
+//builtins
+void	ft_echo(void);
+void	ft_cd(void);
+void	ft_pwd(void);
+void	ft_exit(void);
 
 // printf("\n\n!!!TEST!!!\n\n");
 
