@@ -6,7 +6,11 @@
 #    By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 17:42:40 by preed             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/07/13 14:55:46 by lgarrosh         ###   ########.fr        #
+=======
+#    Updated: 2022/07/11 17:34:33 by lgarrosh         ###   ########.fr        #
+>>>>>>> 565e6ce4b73921fa00e14edef5aeb2910b9a84e6
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +20,6 @@ CC			= cc
 FLAGS		= -Wall -Wextra -Werror
 
 LIBFT		= libft/libft.a
-PIPEX		= pipex/pipex.a
 INC			= includes/
 HEADER		= minishell.h struct.h
 HEADERS		= $(addprefix $(INC), $(HEADER))
@@ -42,6 +45,7 @@ all: makelib $(NAME)
 
 $(OBJ_D):
 		@mkdir -p $@
+<<<<<<< HEAD
 		@mkdir -p $(addprefix $@/, $(MAIN_D))
 
 $(NAME): $(OBJ_D) $(OBJ_F) $(LIBFT) $(PIPEX) $(HEADERS) Makefile
@@ -53,12 +57,10 @@ makelib:
 
 clean:
 	@make -C $(LIB_DIR) clean --no-print-directory
-	@make -C $(PIP_DIR) clean --no-print-directory
 	rm -rfv $(OBJ_D)
 
 fclean: clean
 	@make -C $(LIB_DIR) fclean --no-print-directory
-	@make -C $(PIP_DIR) fclean --no-print-directory
 	rm -rfv $(NAME)
 
 re: fclean all
