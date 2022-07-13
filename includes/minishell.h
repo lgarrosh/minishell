@@ -6,7 +6,7 @@
 /*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 14:37:38 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/07/03 16:17:13 by lgarrosh         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:56:23 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 // # include <termcap.h>
 // # include <sys/ioctl.h>
 # include "libft.h"
-# include "get_next_line.h"
 # include "struct.h"
 
 // pipex

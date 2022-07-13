@@ -6,7 +6,7 @@
 #    By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 17:42:40 by preed             #+#    #+#              #
-#    Updated: 2022/06/25 18:12:55 by lgarrosh         ###   ########.fr        #
+#    Updated: 2022/07/13 14:55:46 by lgarrosh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,39 +23,18 @@ HEADERS		= $(addprefix $(INC), $(HEADER))
 
 LIB_DIR		= libft/
 PIP_DIR		= pipex/
-GNL_D		= gnl/
 SRC_D		= src/
 OBJ_D		= obj/
+MAIN_D		= main
 
-SRC_GNL_F	=	$(addprefix gnl/, $(GNL))
+SRC_F 		= $(addprefix $(SRC_D)$(MAIN_D)/, $(MAIN))
 
-SRC_F 		=	$(addprefix src/main/, $(MAIN)) \
-				$(addprefix src/env/, $(ENV)) \
-				$(addprefix src/execution/, $(EXEC)) \
-				$(addprefix src/tools/, $(TOOLS)) \
-				$(addprefix src/parser/, $(PARSER)) \
+MAIN		= minishell.c
 
-GNL			= get_next_line.c
-
-MAIN		= main.c
-
-ENV			= env.c env_oper.c
-
-EXEC		= executive.c
-
-TOOLS		= free.c init.c error.c
-
-PARSER		= parser.c
-
-OBJ_F 		=	$(subst $(SRC_D),$(OBJ_D),$(SRC_F:%.c=%.o)) 
-
-OBJ_GNL_F 	=	$(addprefix obj/, $(SRC_GNL_F:%.c=%.o))
+OBJ_F 		= $(subst $(SRC_D),$(OBJ_D),$(SRC_F:%.c=%.o)) 
 
 $(OBJ_D)%.o: $(SRC_D)%.c
-	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC) -I$(PIP_DIR)$(INC)
-
-$(OBJ_D)$(GNL_D)%.o: $(GNL_D)%.c
-	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(GNL_D) -I$(LIB_DIR)$(INC) -I$(PIP_DIR)$(INC)
+	$(CC) $(FLAGS) -c $< -o $@  -I$(INC) -I$(LIB_DIR)$(INC) -I$(PIP_DIR)$(INC)
 
 .PHONY: all clean fclean re
 
@@ -63,13 +42,13 @@ all: makelib $(NAME)
 
 $(OBJ_D):
 		@mkdir -p $@
-		@mkdir -p $(addprefix $@/, main env execution tools parser gnl)
+		@mkdir -p $(addprefix $@/, $(MAIN_D))
 
-$(NAME): $(OBJ_D) $(OBJ_F) $(OBJ_GNL_F) $(LIBFT) $(PIPEX) $(HEADERS) Makefile
-	$(CC) $(FLAGS) $(OBJ_F) $(OBJ_GNL_F) -o $(NAME) $(LIBFT) $(PIPEX) -I$(INC)
+$(NAME): $(OBJ_D) $(OBJ_F) $(LIBFT) $(PIPEX) $(HEADERS) Makefile
+	$(CC) $(FLAGS) $(OBJ_F) -o $(NAME) $(LIBFT) $(PIPEX) -I$(INC)
 
 makelib:
-	@make -C $(LIB_DIR) bonus --no-print-directory
+	@make -C $(LIB_DIR) --no-print-directory
 	@make -C $(PIP_DIR) --no-print-directory
 
 clean:
