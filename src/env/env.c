@@ -3,93 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arman <arman@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgarrosh <lgarrosh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:02:33 by lgarrosh          #+#    #+#             */
-/*   Updated: 2022/06/15 01:27:05 by arman            ###   ########.fr       */
+/*   Updated: 2022/08/12 14:36:27 by lgarrosh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env	*ft_creat_node(char *name, char *value);
-static void		ft_add_node(t_env **env, t_env *node);
-
-t_env	*ft_env_init(char **env)
+int	ft_parse_envp(t_llist *l, char *envp[])
 {
-	t_env	*env_list;
-	t_env	*newnode;
-	char	**var;
-	int		i;
+	char			*key;
+	char			*val;
+	unsigned int	i;
 
+	if (!envp || !*envp || !l)
+		return (-1);
 	i = 0;
-	env_list = NULL;
-	while (env[i])
+	while (envp[i])
 	{
-		var = ft_split(env[i], '=');
-		newnode = ft_creat_node(var[0], var[1]);
-		if (!env_list)
-			env_list = newnode;
-		else
-			ft_add_node(&env_list, newnode);
-		free(var[0]);
-		free(var[1]);
-		free(var);
-		i++;
+		if (ft_strslice(envp[i], "=", &key, &val))
+			return (ft_error(1, "minishell: ft_parse_envp", 1, 0));
+		if (llist_push(l, key, val))
+			return (ft_error(1, "minishell: ft_parse_envp", 1, 0));
+		++i;
 	}
-	return (env_list);
+	return (0);
 }
 
-static t_env	*ft_creat_node(char *name, char *value)
+char	**ft_compose_envp(t_llist *env)
 {
-	t_env	*new;
+	char			**envp;
+	unsigned int	i;
+	t_ll_elem		*ptr;
 
-	new = malloc(sizeof(t_env));
-	if (new)
-	{
-		new->name = ft_strdup(name);
-		new->value = ft_strdup(value);
-		new->next = NULL;
-	}
-	return (new);
-}
-
-static void	ft_add_node(t_env **env, t_env *node)
-{
-	t_env	*list;
-
-	if (!env || !node)
-		return ;
-	if (*env)
-	{
-		list = *env;
-		while (list->next)
-			list = list->next;
-		list->next = node;
-	}
-}
-
-void	ft_env_export(t_env **env_list, char *name, char *value)
-{
-	if (!name || !value || !env_list)
-		return ;
-	if (ft_if_name_in_env(env_list, name))
-		ft_env_unset(env_list, name);
-	ft_add_node(env_list, ft_creat_node(name, value));
-}
-
-t_env	*ft_if_name_in_env(t_env **stack, char *name)
-{
-	t_env *tmp;
-
-	if (!stack || !name)
+	envp = (char **)malloc(sizeof(char *) * (env->size + 1));
+	if (!envp)
 		return (NULL);
-	tmp = *stack;
-	while(tmp)
+	i = 0;
+	ptr = env->head;
+	envp[env->size] = NULL;
+	while (i < env->size)
 	{
-		if (!(ft_strncmp(tmp->name, name, ft_strlen(name) + 1)))
-			return (tmp);
-		tmp = tmp->next;
+		envp[i] = ft_strjoin2(ptr->key, ptr->val, '=', 1);
+		if (!envp[i])
+			return (_ft_strdestroy2(envp, i));
+		ptr = ptr->next;
+		++i;
 	}
-	return (NULL);
+	return (envp);
 }
